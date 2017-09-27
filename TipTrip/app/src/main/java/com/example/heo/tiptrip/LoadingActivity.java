@@ -10,6 +10,7 @@ public class LoadingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //2초 유지
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
