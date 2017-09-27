@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".TriplistActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".MenuActivity"></activity>
         <activity android:name=".HouseholdActivity"></activity>

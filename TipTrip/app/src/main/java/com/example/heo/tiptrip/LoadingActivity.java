@@ -15,7 +15,7 @@ public class LoadingActivity extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,TriplistActivity.class));
         finish();
     }
 }
