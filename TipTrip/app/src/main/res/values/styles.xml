@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--로딩 이미지와 맵핑-->
+    <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">@drawable/loading_image</item>
+    </style>
+
 </resources>

@@ -9,13 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <!-- 로딩(스플래시) 액티비티 -->
+        <activity android:name=".LoadingActivity"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".MenuActivity"></activity>
         <activity android:name=".HouseholdActivity"></activity>
         <activity android:name=".TouristsiteActivity"></activity>
