@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         Toast.makeText(getApplicationContext(), intent.getExtras().get("name").toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), intent.getExtras().get("country").toString(),Toast.LENGTH_SHORT).show();
 
     }
 
