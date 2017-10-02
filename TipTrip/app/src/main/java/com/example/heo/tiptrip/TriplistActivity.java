@@ -3,13 +3,14 @@ package com.example.heo.tiptrip;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class TriplistActivity extends Activity implements AdapterView.OnItemClickListener {
+public class TriplistActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private String[] examples = {"example1","example2"};
 
     @Override
@@ -33,8 +34,9 @@ public class TriplistActivity extends Activity implements AdapterView.OnItemClic
     }
 
     public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-        Toast.makeText(getApplicationContext(),examples[position],Toast.LENGTH_SHORT).show();
-        
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("name",examples[position]);
+        startActivity(intent);
 
     }
 }
