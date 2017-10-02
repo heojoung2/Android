@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class TriplistActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    private String[] examples = {"example1","example2"};
+    private String[] trip_list = {"신나는 한국 여행 [한국]","더웠던 일본여행기2 [일본]"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
 
         //ArrayAdapter : 배열에 담긴 데이터를 관리하는 클래스
         //setAdapter로 액티비티에 보이게 한다
-        list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,examples));
+        list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,trip_list));
 
         list.setOnItemClickListener(this);   //리스트뷰의 아이템을 클릭했을 때 처리할 리스너를 설정
     }
@@ -35,7 +35,12 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
 
     public void onItemClick(AdapterView<?> parent, View v, int position, long id){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("name",examples[position]);
+
+        String name = trip_list[position];
+        String country = trip_list[position];
+
+        intent.putExtra("name",name);       //아이템 넘기기
+        intent.putExtra("country",country);
         startActivity(intent);
 
     }
