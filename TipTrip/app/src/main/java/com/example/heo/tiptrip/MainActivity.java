@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         String country = intent.getExtras().get("country").toString();
 
         ActionBar actionbar = getSupportActionBar();
-        actionbar.setTitle(name+" ["+country+"]");
+        actionbar.setTitle(name);
 
         setContentView(R.layout.activity_main);
     }
