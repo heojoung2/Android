@@ -16,7 +16,10 @@ public class LoadingActivity extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        startActivity(new Intent(this,TriplistActivity.class));
+
+        Intent intent = new Intent(this, TriplistActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);       //다음 액티비티를 스택에 넣지 않는다.
+        startActivity(intent);
         finish();
     }
 }

@@ -42,7 +42,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
 
     public void onButtonClick_newtrip(View v){
         Intent intent = new Intent(getApplicationContext(), NewtripActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);   //다음 액티비티를 스택에 넣지 않는다.
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
         dbHelper.close();
         startActivity(intent);
@@ -58,6 +58,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         intent.putExtra("country",country);
 
         dbHelper.close();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

@@ -24,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), TriplistActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
+
     public void onButtonClick_menu(View v){
         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
         startActivity(intent);
