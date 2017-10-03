@@ -24,22 +24,20 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         ListView list = (ListView) findViewById(R.id.existing_trip_listview);
 
         dbHelper = new DBHelper(getApplicationContext(), "db.db");
-        try {
+        try {       //table_name이 존재 할 경우
             dbHelper.Create_table(table_name);
         }
         catch(Exception e)
-        {
-            int a=3;
-        }
+        {}
 
-        List<String> trip_list = dbHelper.All_element(table_name);
+        List<String> trip_list = dbHelper.All_element(table_name);  //TRIPLIST테이블의 모든 요소 모두 불러오기
 
         //ArrayAdapter : 배열에 담긴 데이터를 관리하는 클래스
         //setAdapter로 액티비티에 보이게 한다
         list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,trip_list));
 
         list.setOnItemClickListener(this);   //리스트뷰의 아이템을 클릭했을 때 처리할 리스너를 설정
-
+        //dbHelper.Drop(table_name);
     }
 
     public void onButtonClick_newtrip(View v){
@@ -51,7 +49,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-        List<String> name_country = dbHelper.get_name_country(table_name,position);
+        List<String> name_country = dbHelper.get_name_country(table_name,position);     //position으로 해당 키의 항목 가져오기
         String name = name_country.get(0);
         String country = name_country.get(1);
 

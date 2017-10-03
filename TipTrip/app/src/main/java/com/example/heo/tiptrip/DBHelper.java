@@ -22,6 +22,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
 
+    public void Drop(String name)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "DROP TABLE "+name;
+        db.execSQL(query);
+        db.close();
+    }
+
     public void Create_table(String name) {       //테이블 생성
         SQLiteDatabase db = getWritableDatabase();
         String query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT);";

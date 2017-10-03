@@ -50,8 +50,8 @@ public class NewtripActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"나라를 선택해 주세요",Toast.LENGTH_SHORT).show();
         }
         else{
-            DBHelper dbHelper = new DBHelper(getApplicationContext(), "db.db");
-            dbHelper.Insert("TRIPLIST",name_text.getText().toString(),country);
+            DBHelper dbHelper = new DBHelper(getApplicationContext(), "db.db");     //db불러오기
+            dbHelper.Insert("TRIPLIST",name_text.getText().toString(),country);     //데이터 추가
             dbHelper.close();
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
