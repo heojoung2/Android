@@ -15,50 +15,50 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {       //테이블 생성
-        String query = "CREATE TABLE TRIPLIST (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT);";
-        sqLiteDatabase.execSQL(query);
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        String query = "DROP TABLE IF EXITS TRIPLIST";
-        sqLiteDatabase.execSQL(query);
-        onCreate(sqLiteDatabase);
     }
 
-    public void insert(String name, String country){
+    public void Create_table(String name) {       //테이블 생성
         SQLiteDatabase db = getWritableDatabase();
-        String query = "INSERT INTO TRIPLIST VALUES(null, '" + name + "', '" + country + "');";
+        String query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT);";
         db.execSQL(query);
         db.close();
     }
 
-    public List<String> get_name_country(int position){
+
+    public void Insert(String table_name, String name, String country){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "INSERT INTO "+table_name+" VALUES(null, '" + name + "', '" + country + "');";
+        db.execSQL(query);
+        db.close();
+    }
+
+    public List<String> get_name_country(String table_name,int position){
         SQLiteDatabase db = getReadableDatabase();
         List<String> result = new ArrayList<String>();
 
-        Cursor cursor = db.rawQuery("SELECT name,country FROM TRIPLIST", null);
+        Cursor cursor = db.rawQuery("SELECT name,country FROM "+table_name +" WHERE id = "+ (position+1), null);
         while (cursor.moveToNext()){
             result.add(cursor.getString(0));
             result.add(cursor.getString(1));
-            System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"+cursor.getString(0));
-            System.out.println("Z"+cursor.getString(1));
-
         }
+        db.close();
         return result;
     }
 
-    public List<String> All_element(){
+    public List<String> All_element(String table_name){
         SQLiteDatabase db = getReadableDatabase();
         List<String> result = new ArrayList<String>();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM TRIPLIST", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+table_name, null);
         while (cursor.moveToNext()){
             result.add(cursor.getString(1)+ " ["+cursor.getString(2)+"]");
         }
+        db.close();
         return result;
     }
-
-
 }

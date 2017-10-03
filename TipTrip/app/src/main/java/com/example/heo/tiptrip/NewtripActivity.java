@@ -51,7 +51,7 @@ public class NewtripActivity extends AppCompatActivity {
         }
         else{
             DBHelper dbHelper = new DBHelper(getApplicationContext(), "db.db");
-            dbHelper.insert(name_text.getText().toString(),country);
+            dbHelper.Insert("TRIPLIST",name_text.getText().toString(),country);
             dbHelper.close();
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

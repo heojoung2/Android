@@ -15,6 +15,7 @@ import java.util.List;
 
 public class TriplistActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     DBHelper dbHelper;
+    String table_name="TRIPLIST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +24,22 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         ListView list = (ListView) findViewById(R.id.existing_trip_listview);
 
         dbHelper = new DBHelper(getApplicationContext(), "db.db");
-        List<String> trip_list = dbHelper.All_element();
+        try {
+            dbHelper.Create_table(table_name);
+        }
+        catch(Exception e)
+        {
+            int a=3;
+        }
+
+        List<String> trip_list = dbHelper.All_element(table_name);
 
         //ArrayAdapter : 배열에 담긴 데이터를 관리하는 클래스
         //setAdapter로 액티비티에 보이게 한다
         list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,trip_list));
 
         list.setOnItemClickListener(this);   //리스트뷰의 아이템을 클릭했을 때 처리할 리스너를 설정
+
     }
 
     public void onButtonClick_newtrip(View v){
@@ -41,7 +51,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-        List<String> name_country = dbHelper.get_name_country(position);
+        List<String> name_country = dbHelper.get_name_country(table_name,position);
         String name = name_country.get(0);
         String country = name_country.get(1);
 
