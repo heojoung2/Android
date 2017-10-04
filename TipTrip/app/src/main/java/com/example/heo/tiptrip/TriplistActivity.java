@@ -1,9 +1,11 @@
 package com.example.heo.tiptrip;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class TriplistActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class TriplistActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     DBHelper dbHelper;
     String table_name="TRIPLIST";
     List<String> trip_list;
@@ -29,7 +31,12 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         }
         catch(Exception e)
         {}
+        ListView(); //리스트뷰 보이는 함수
 
+        //dbHelper.Drop(table_name);
+    }
+
+    public void ListView(){
         ListView list = (ListView) findViewById(R.id.existing_trip_listview);
         trip_list = dbHelper.All_element(table_name);  //TRIPLIST테이블의 모든 요소 모두 불러오기
 
@@ -38,7 +45,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,trip_list));
 
         list.setOnItemClickListener(this);   //리스트뷰의 아이템을 클릭했을 때 처리할 리스너를 설정
-        //dbHelper.Drop(table_name);
+        list.setOnItemLongClickListener(this);  //롱클릭헀을 때
     }
 
     public void onButtonClick_newtrip(View v){
@@ -49,7 +56,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-        String str = trip_list.get(position);
+        String str = trip_list.get(position);       //선택한 제목 전체 받아오기
         int split=str.indexOf(" ");
         String name=str.substring(split+1,str.length());
         String country=str.substring(1,split-1);
@@ -60,5 +67,33 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
 
         dbHelper.close();
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("삭제하시겠습니까?");
+
+        dialog.setNegativeButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String str = trip_list.get(position);
+                int split=str.indexOf(" ");
+                String name=str.substring(split+1,str.length());
+                String country=str.substring(1,split-1);
+
+                dbHelper.Delete(table_name,name,country);   //선택한 제목 삭제
+                ListView();
+            }
+        });
+
+        dialog.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {   //아무것도 안함
+            }
+        });
+
+        dialog.show();
+        return true;
     }
 }
