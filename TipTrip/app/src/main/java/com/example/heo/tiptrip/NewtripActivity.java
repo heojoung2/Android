@@ -61,12 +61,4 @@ public class NewtripActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    /*
-    @Override
-    public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), TriplistActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(intent);
-    }
-    */
 }

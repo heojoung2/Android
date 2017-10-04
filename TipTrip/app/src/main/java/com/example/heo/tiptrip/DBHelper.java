@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM "+table_name, null);
         while (cursor.moveToNext()){
-            result.add(cursor.getString(1)+ " ["+cursor.getString(2)+"]");
+            result.add("["+cursor.getString(2)+"] "+cursor.getString(1));
         }
         db.close();
         return result;

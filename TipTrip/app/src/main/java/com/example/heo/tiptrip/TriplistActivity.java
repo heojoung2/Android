@@ -16,6 +16,7 @@ import java.util.List;
 public class TriplistActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     DBHelper dbHelper;
     String table_name="TRIPLIST";
+    List<String> trip_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         {}
 
         ListView list = (ListView) findViewById(R.id.existing_trip_listview);
-        List<String> trip_list = dbHelper.All_element(table_name);  //TRIPLIST테이블의 모든 요소 모두 불러오기
+        trip_list = dbHelper.All_element(table_name);  //TRIPLIST테이블의 모든 요소 모두 불러오기
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,trip_list);    //ArrayAdapter : 배열에 담긴 데이터를 관리하는 클래스
         list.setAdapter(adapter);       //setAdapter로 액티비티에 보이게 한다
@@ -48,9 +49,10 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-        List<String> name_country = dbHelper.get_name_country(table_name,position);     //position으로 해당 키의 항목 가져오기
-        String name = name_country.get(0);
-        String country = name_country.get(1);
+        String str = trip_list.get(position);
+        int split=str.indexOf(" ");
+        String name=str.substring(split+1,str.length());
+        String country=str.substring(1,split-1);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("name",name);       //아이템 넘기기
@@ -59,5 +61,4 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         dbHelper.close();
         startActivity(intent);
     }
-
 }
