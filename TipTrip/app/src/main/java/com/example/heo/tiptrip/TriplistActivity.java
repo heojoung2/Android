@@ -83,6 +83,12 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
                 String country=str.substring(1,split-1);
 
                 dbHelper.Delete(table_name,name,country);   //선택한 제목 삭제
+                try{        //없을 경우
+                    dbHelper.Drop(name+country+"household");
+                    dbHelper.Drop(name+country+"dailog");
+                }
+                catch(Exception e){
+                }
                 ListView();
             }
         });

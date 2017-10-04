@@ -52,12 +52,18 @@ public class NewtripActivity extends AppCompatActivity {
         else{
             DBHelper dbHelper = new DBHelper(getApplicationContext(), "db.db");     //db불러오기
             dbHelper.Insert("TRIPLIST",name_text.getText().toString(),country);     //데이터 추가
-            dbHelper.close();
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.putExtra("name",name_text.getText());
             intent.putExtra("country",country);
 
+            try {       //table_name이 존재 할 경우
+                dbHelper.Create_table(name_text.getText()+country+"household"); //가계부 테이블
+                dbHelper.Create_table(name_text.getText()+country+"dailog");    //일정 테이블
+            }
+            catch(Exception e)
+            {}
+            dbHelper.close();
             startActivity(intent);
         }
     }
