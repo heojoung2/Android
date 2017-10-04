@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), TriplistActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);   //현재 task 비우고 새 task만들기
         startActivity(intent);
     }
 

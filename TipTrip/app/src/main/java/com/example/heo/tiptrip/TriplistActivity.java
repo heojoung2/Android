@@ -21,7 +21,6 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_triplist);
-        ListView list = (ListView) findViewById(R.id.existing_trip_listview);
 
         dbHelper = new DBHelper(getApplicationContext(), "db.db");
         try {       //table_name이 존재 할 경우
@@ -30,10 +29,11 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         catch(Exception e)
         {}
 
+        ListView list = (ListView) findViewById(R.id.existing_trip_listview);
         List<String> trip_list = dbHelper.All_element(table_name);  //TRIPLIST테이블의 모든 요소 모두 불러오기
 
-        //ArrayAdapter : 배열에 담긴 데이터를 관리하는 클래스
-        //setAdapter로 액티비티에 보이게 한다
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,trip_list);    //ArrayAdapter : 배열에 담긴 데이터를 관리하는 클래스
+        list.setAdapter(adapter);       //setAdapter로 액티비티에 보이게 한다
         list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,trip_list));
 
         list.setOnItemClickListener(this);   //리스트뷰의 아이템을 클릭했을 때 처리할 리스너를 설정
@@ -42,8 +42,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
 
     public void onButtonClick_newtrip(View v){
         Intent intent = new Intent(getApplicationContext(), NewtripActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);       //다음 액티비티를 스택에 넣지 않는다.
         dbHelper.close();
         startActivity(intent);
     }
@@ -58,7 +57,6 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         intent.putExtra("country",country);
 
         dbHelper.close();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
