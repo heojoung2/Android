@@ -42,8 +42,9 @@ public class NewtripActivity extends AppCompatActivity {
 
     public void onButtonClick_checking(View v){
         EditText name_text = (EditText) findViewById(R.id.name_text);
+        String name = name_text.getText().toString();
 
-        if(name_text.getText().toString().length() == 0) {
+        if(name.length() == 0) {
             Toast.makeText(getApplicationContext(),"제목을 입력해 주세요",Toast.LENGTH_SHORT).show();
         }
         else if(country.length()==0) {
@@ -51,14 +52,22 @@ public class NewtripActivity extends AppCompatActivity {
         }
         else{
             DBHelper dbHelper = new DBHelper(getApplicationContext(), "db.db");     //db불러오기
+            int cnt=dbHelper.Search_count(name,country);
 
-            dbHelper.Insert_triplist(name_text.getText().toString(),country);     //데이터 추가
-            dbHelper.close();
+            if(cnt!=0){
+                Toast.makeText(getApplicationContext(),"중복됩니다",Toast.LENGTH_SHORT).show();
+                dbHelper.close();
+            }
+            else {
 
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.putExtra("name", name_text.getText());
-            intent.putExtra("country", country);
-            startActivity(intent);
+                dbHelper.Insert_triplist(name_text.getText().toString(), country);     //데이터 추가
+                dbHelper.close();
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("name", name_text.getText());
+                intent.putExtra("country", country);
+                startActivity(intent);
+            }
         }
     }
 }

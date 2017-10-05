@@ -50,6 +50,15 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public int Search_count(String name, String country){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * from TRIPLIST where name='"+name+"' and country='"+country+"'", null);
+
+        int cnt = cursor.getCount();
+        db.close();
+        return cnt;
+    }
+
     public void Insert_triplist(String name, String country){
         SQLiteDatabase db = getWritableDatabase();
         String query = "INSERT INTO TRIPLIST VALUES(null, '" + name + "', '" + country + "');";
