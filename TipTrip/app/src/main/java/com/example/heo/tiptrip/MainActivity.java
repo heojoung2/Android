@@ -9,21 +9,21 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    String name="";
+    String country="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        String name = intent.getExtras().get("name").toString();        //전 액티비티에서 넘긴 아이템 받기
-        String country = intent.getExtras().get("country").toString();
+        name = intent.getExtras().get("name").toString();        //전 액티비티에서 넘긴 아이템 받기
+        country = intent.getExtras().get("country").toString();
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle(name);
 
         setContentView(R.layout.activity_main);
-
-
     }
 
     @Override
@@ -39,14 +39,19 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onButtonClick_household(View v){
         Intent intent = new Intent(getApplicationContext(), HouseholdActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("country", country);
         startActivity(intent);
     }
     public void onButtonClick_touristsite(View v){
         Intent intent = new Intent(getApplicationContext(), TouristsiteActivity.class);
+        intent.putExtra("country", country);
         startActivity(intent);
     }
     public void onButtonClick_dailog(View v){
         Intent intent = new Intent(getApplicationContext(), DailogActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("country", country);
         startActivity(intent);
     }
 }

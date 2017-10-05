@@ -32,15 +32,41 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void Create_table(String name) {       //테이블 생성
         SQLiteDatabase db = getWritableDatabase();
-        String query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT);";
+        String query="";
+
+        if(name=="TRIPLIST")
+        {
+            query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT);";
+        }
+        else if(name=="HOUSEHOLD")
+        {
+            query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT, data TEXT, money FLOAT, change FLOAT, number INTEGER);";
+        }
+        else if(name=="DAILOG")
+        {
+            query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT, data TEXT, context TEXT);";
+        }
         db.execSQL(query);
         db.close();
     }
 
-
-    public void Insert(String table_name, String name, String country){
+    public void Insert_triplist(String name, String country){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "INSERT INTO "+table_name+" VALUES(null, '" + name + "', '" + country + "');";
+        String query = "INSERT INTO TRIPLIST VALUES(null, '" + name + "', '" + country + "');";
+        db.execSQL(query);
+        db.close();
+    }
+
+    public void Insert_household(String name, String country,String data , float money, float change, int number){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "";
+        db.execSQL(query);
+        db.close();
+    }
+
+    public void Insert_dailog(String name, String country,String data, String context){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "";
         db.execSQL(query);
         db.close();
     }

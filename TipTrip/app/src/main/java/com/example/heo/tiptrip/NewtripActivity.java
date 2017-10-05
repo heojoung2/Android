@@ -50,29 +50,15 @@ public class NewtripActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"나라를 선택해 주세요",Toast.LENGTH_SHORT).show();
         }
         else{
-            Boolean duplication_flag = false;       //중복된 이름체크
             DBHelper dbHelper = new DBHelper(getApplicationContext(), "db.db");     //db불러오기
 
-            try {
-                String name = name_text.getText().toString().replace(" ", "_");
-                dbHelper.Create_table(name + country + "household"); //가계부 테이블
-                dbHelper.Create_table(name + country + "dailog");    //일정 테이블
-            }
-            catch(Exception e){
-                Toast.makeText(getApplicationContext(),"중복된 이름입니다",Toast.LENGTH_SHORT).show();
-                duplication_flag=true;
-            }
-            finally{
-                dbHelper.close();
-            }
-            if(duplication_flag==false) {
-                dbHelper.Insert("TRIPLIST",name_text.getText().toString(),country);     //데이터 추가
+            dbHelper.Insert_triplist(name_text.getText().toString(),country);     //데이터 추가
+            dbHelper.close();
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("name", name_text.getText());
-                intent.putExtra("country", country);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("name", name_text.getText());
+            intent.putExtra("country", country);
+            startActivity(intent);
         }
     }
 }

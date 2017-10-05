@@ -17,7 +17,6 @@ import java.util.List;
 
 public class TriplistActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     DBHelper dbHelper;
-    String table_name="TRIPLIST";
     List<String> trip_list;
 
     @Override
@@ -27,18 +26,30 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
 
         dbHelper = new DBHelper(getApplicationContext(), "db.db");
         try {       //table_name이 존재 할 경우
-            dbHelper.Create_table(table_name);
+            dbHelper.Create_table("TRIPLIST");
+        }
+        catch(Exception e)
+        {}
+        try {
+            dbHelper.Create_table("HOUSEHOLD"); //가계부 테이블
+        }
+        catch(Exception e)
+        {}
+        try {
+            dbHelper.Create_table("DAILOG"); //일정 테이블
         }
         catch(Exception e)
         {}
         ListView(); //리스트뷰 보이는 함수
 
-        //dbHelper.Drop(table_name);
+        //dbHelper.Drop("TRIPLIST");
+        //dbHelper.Drop("HOUSEHOLD");
+        //dbHelper.Drop("DAILOG");
     }
 
     public void ListView(){
         ListView list = (ListView) findViewById(R.id.existing_trip_listview);
-        trip_list = dbHelper.All_element(table_name);  //TRIPLIST테이블의 모든 요소 모두 불러오기
+        trip_list = dbHelper.All_element("TRIPLIST");  //TRIPLIST테이블의 모든 요소 모두 불러오기
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,trip_list);    //ArrayAdapter : 배열에 담긴 데이터를 관리하는 클래스
         list.setAdapter(adapter);       //setAdapter로 액티비티에 보이게 한다
@@ -82,12 +93,9 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
                 String name=str.substring(split+1,str.length());
                 String country=str.substring(1,split-1);
 
-                dbHelper.Delete(table_name,name,country);   //선택한 제목 삭제
-
-                name=name.replace(" ","_");     //테이블 이름에 공백이 있으면 안 되기때문
-                dbHelper.Drop(name+country+"household");
-                dbHelper.Drop(name+country+"dailog");
-
+                dbHelper.Delete("TRIPLIST",name,country);   //선택한 제목 삭제
+                dbHelper.Delete("HOUSEHOLD",name,country);   //제목과 나라와 같은 가계부 삭제
+                dbHelper.Delete("DAILOG",name,country);   //제목과 나라와 같은 일정 삭제
                 ListView();
             }
         });
