@@ -54,7 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * from TRIPLIST where name='"+name+"' and country='"+country+"'", null);
 
-        int cnt = cursor.getCount();
+        int cnt = cursor.getCount();    //접근 가능한 row 갯수 세기
         db.close();
         return cnt;
     }

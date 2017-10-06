@@ -54,7 +54,7 @@ public class NewtripActivity extends AppCompatActivity {
             DBHelper dbHelper = new DBHelper(getApplicationContext(), "db.db");     //db불러오기
             int cnt=dbHelper.Search_count(name,country);
 
-            if(cnt!=0){
+            if(cnt!=0){ //겹치는게 있을 경우
                 Toast.makeText(getApplicationContext(),"중복됩니다",Toast.LENGTH_SHORT).show();
                 dbHelper.close();
             }
