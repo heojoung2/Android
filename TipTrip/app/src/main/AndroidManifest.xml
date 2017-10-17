@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.heo.tiptrip">
 
+    <!-- 카메라 하드웨어 기능 사용 -->
+    <uses-feature android:name="android.hardware.camera" />
+
+    <!-- 카메라와 외장메모리 권한 사용 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +29,17 @@
         <activity android:name=".HouseholdActivity"></activity>
         <activity android:name=".TouristsiteActivity"></activity>
         <activity android:name=".DailogActivity"></activity>
+
+        <!-- 카메라 부분에서 file:// → content://로 경로를 바꿔서 사용 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.shuvic.alumni.cameraalbum"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 
