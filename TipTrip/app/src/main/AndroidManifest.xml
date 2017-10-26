@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,23 +23,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MenuActivity"></activity>
-        <activity android:name=".HouseholdActivity"></activity>
-        <activity android:name=".TouristsiteActivity"></activity>
-        <activity android:name=".DailogActivity"></activity>
+        <activity android:name=".SelectMenuImageActivity" />
+        <activity android:name=".HouseholdActivity" />
+        <activity android:name=".TouristsiteActivity" />
+        <activity android:name=".DailogActivity" />
 
         <!-- 카메라 부분에서 file:// → content://로 경로를 바꿔서 사용 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.shuvic.alumni.cameraalbum"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".DetectMenuActivity"></activity>
     </application>
 
 </manifest>

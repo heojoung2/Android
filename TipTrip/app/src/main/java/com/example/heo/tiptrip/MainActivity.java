@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onButtonClick_menu(View v){
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SelectMenuImageActivity.class);
         startActivity(intent);
     }
     public void onButtonClick_household(View v){

@@ -12,12 +12,12 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
 import android.widget.Toast;
 
 import java.io.File;
@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class MenuActivity extends AppCompatActivity {
+public class SelectMenuImageActivity extends AppCompatActivity {
 
     public static final int PERMISSION_CAMERA = 0;
     public static final int CAMERA_CODE = 1;
@@ -42,9 +42,9 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_select_menu_image);
 
-        imageView = (ImageView)findViewById(R.id.image_view);
+        imageView = (ImageView)findViewById(R.id.imageView);
 
         checkPermission();
     }
@@ -122,12 +122,12 @@ public class MenuActivity extends AppCompatActivity {
         Uri contentURI = Uri.fromFile(file);
 
         mediaScanIntent.setData(contentURI);
-//        sendBroadcast(mediaScanIntent);
+        sendBroadcast(mediaScanIntent);
 
-//        Toast.makeText(this, "사진이 앨범에 저장되었습니다!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "사진이 앨범에 저장되었습니다!", Toast.LENGTH_SHORT).show();
     }
 
-    // 카메라 전용 CROP
+    // CROP
     public void cropImage(){
         Log.i("cropImage", "Call");
         Log.i("cropImage", "photoURI: " + photoURI + " / albumURI: " + albumURI);
@@ -141,14 +141,21 @@ public class MenuActivity extends AppCompatActivity {
 
         cropIntent.setDataAndType(photoURI, "image/*");
 
-//        cropIntent.putExtra("outputX", 200);   // CROP한 이미지의 x축 크기
-//        cropIntent.putExtra("outputY", 200);   // CROP한 이미지의 y축 크기
+        cropIntent.putExtra("outputX", 200);   // CROP한 이미지의 x축 크기
+        cropIntent.putExtra("outputY", 200);   // CROP한 이미지의 y축 크기
         cropIntent.putExtra("aspectX", 1);     // CROP box의 x축 비율
         cropIntent.putExtra("aspectY", 1);     // CROP box의 y축 비율
         cropIntent.putExtra("scale", false);
         cropIntent.putExtra("output", albumURI);   // 크랍된 이미지를 해당 경로에 저장
 
         startActivityForResult(cropIntent, CROP_CODE);
+    }
+
+
+    // 갤러리 버튼 눌렀을 때
+    public void onButtonClick_select(View v){
+        Intent intent = new Intent(getApplicationContext(), DetectMenuActivity.class);
+        startActivity(intent);
     }
 
 
@@ -167,7 +174,7 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast.makeText(MenuActivity.this, "카메라를 취소하였습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SelectMenuImageActivity.this, "카메라를 취소하였습니다.", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -240,7 +247,7 @@ public class MenuActivity extends AppCompatActivity {
                 for(int i=0; i<grantResults.length; i++){
                     // grantResults[] : 허용된 권한은 0, 거부한 권한은 -1
                     if(grantResults[i] < 0){
-                        Toast.makeText(MenuActivity.this, "해당 권한을 활성화 하셔야 합니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SelectMenuImageActivity.this, "해당 권한을 활성화 하셔야 합니다.", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
