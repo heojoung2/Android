@@ -45,6 +45,7 @@ public class SelectMenuImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_menu_image);
 
         imageView = (ImageView)findViewById(R.id.imageView);
+        Log.i("onCreate", "imageView result : " + imageView.getDrawable());
 
         checkPermission();
     }
@@ -141,6 +142,7 @@ public class SelectMenuImageActivity extends AppCompatActivity {
 
         cropIntent.setDataAndType(photoURI, "image/*");
 
+        //--------------------크롭 크기 사용자가 지정할 수 있게 바꾸자!!--------------------//
         cropIntent.putExtra("outputX", 200);   // CROP한 이미지의 x축 크기
         cropIntent.putExtra("outputY", 200);   // CROP한 이미지의 y축 크기
         cropIntent.putExtra("aspectX", 1);     // CROP box의 x축 비율
@@ -149,13 +151,6 @@ public class SelectMenuImageActivity extends AppCompatActivity {
         cropIntent.putExtra("output", albumURI);   // 크랍된 이미지를 해당 경로에 저장
 
         startActivityForResult(cropIntent, CROP_CODE);
-    }
-
-
-    // 갤러리 버튼 눌렀을 때
-    public void onButtonClick_select(View v){
-        Intent intent = new Intent(getApplicationContext(), DetectMenuActivity.class);
-        startActivity(intent);
     }
 
 
@@ -201,6 +196,19 @@ public class SelectMenuImageActivity extends AppCompatActivity {
                     imageView.setImageURI(albumURI);
                 }
                 break;
+        }
+    }
+
+
+    // 선택완료 버튼 눌렀을 때
+    public void onButtonClick_select(View v){
+        if(albumURI != null){   // 이미지뷰에 이미지가 있을 때
+            Intent intent = new Intent(getApplicationContext(), DetectMenuActivity.class);
+            intent.putExtra("imageUri", albumURI.toString());
+            startActivity(intent);
+        }
+        else{   // 이미지뷰에 이미지가 없을 때
+            Toast.makeText(this, "이미지가 없습니다..!", Toast.LENGTH_SHORT).show();
         }
     }
 
