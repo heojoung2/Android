@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class NewtripActivity extends AppCompatActivity {
 
-    private String[] country_list={"한국","일본","중국"};
+    private String[] country_list={"네덜란드","독일","라트비아","룩셈부르크","리투아니아","모나코","몬테네그로","몰타","바티칸시국","벨기에","산마리노","스페인","슬로바키아","슬로베니아","아일랜드","안도라","에스토니아","오스트리아","이탈리아","일본","코소보","키프로스","포르투갈","프랑스","핀란드","한국","홍콩"};
     private String country="";
 
     @Override
