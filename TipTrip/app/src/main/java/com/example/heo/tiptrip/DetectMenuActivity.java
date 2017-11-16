@@ -1,12 +1,16 @@
 package com.example.heo.tiptrip;
 
 import android.content.Intent;
+
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+
 public class DetectMenuActivity extends AppCompatActivity {
+
+    private static final String CLOUD_VISION_API_KEY = "AIzaSyCrQfn1Ljwq4tW2axIqD5v65d_OQpKujpA";
 
     ImageView menuImageView;
 
@@ -24,5 +28,6 @@ public class DetectMenuActivity extends AppCompatActivity {
 
         menuImageView.setImageURI(imageUri);
     }
+
 
 }
