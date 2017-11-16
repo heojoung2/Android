@@ -42,9 +42,9 @@ public class DBHelper extends SQLiteOpenHelper {
         {
             query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT, data TEXT, money FLOAT, change FLOAT, number INTEGER);";
         }
-        else if(name=="DAILOG")
+        else if(name=="DAILY")
         {
-            query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT, data TEXT, context TEXT);";
+            query = "CREATE TABLE "+name+" (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT, title TEXT, year TEXT, month TEXT, day TEXT, context TEXT);";
         }
         db.execSQL(query);
         db.close();
@@ -73,9 +73,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void Insert_dailog(String name, String country,String data, String context){
+    public void Insert_daily(String name, String country,String title, String year,String month, String day, String context){
+        System.out.println("2222");
         SQLiteDatabase db = getWritableDatabase();
-        String query = "";
+        String query = "INSERT INTO DAILY VALUES(null, '" + name + "', '" + country + "', '"+title+"', '"+year+"', '"+month+"', '"+day+"', '"+context+"');";
         db.execSQL(query);
         db.close();
     }
@@ -87,13 +88,25 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<String> All_element(String table_name){
+    public List<String> Display_triplist(){
         SQLiteDatabase db = getReadableDatabase();
         List<String> result = new ArrayList<String>();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM "+table_name, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM TRIPLIST", null);
         while (cursor.moveToNext()){
             result.add("["+cursor.getString(2)+"] "+cursor.getString(1));
+        }
+        db.close();
+        return result;
+    }
+
+    public List<String> Display_dailly(String name, String country){
+        SQLiteDatabase db = getReadableDatabase();
+        List<String> result = new ArrayList<String>();
+
+        Cursor cursor = db.rawQuery("SELECT title FROM DAILY WHERE name='"+name+"' AND country='"+country+"'", null);
+        while (cursor.moveToNext()){
+            result.add(cursor.getString(0));
         }
         db.close();
         return result;

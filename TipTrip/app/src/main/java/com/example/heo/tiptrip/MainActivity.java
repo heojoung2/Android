@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), DailyActivity.class);
         intent.putExtra("name", name);
         intent.putExtra("country", country);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }

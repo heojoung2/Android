@@ -36,7 +36,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
         catch(Exception e)
         {}
         try {
-            dbHelper.Create_table("DAILOG"); //일정 테이블
+            dbHelper.Create_table("DAILY"); //일정 테이블
         }
         catch(Exception e)
         {}
@@ -44,16 +44,15 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
 
         //dbHelper.Drop("TRIPLIST");
         //dbHelper.Drop("HOUSEHOLD");
-        //dbHelper.Drop("DAILOG");
+        //dbHelper.Drop("DAILY");
     }
 
     public void ListView(){
         ListView list = (ListView) findViewById(R.id.existing_trip_listview);
-        trip_list = dbHelper.All_element("TRIPLIST");  //TRIPLIST테이블의 모든 요소 모두 불러오기
+        trip_list = dbHelper.Display_triplist();  //TRIPLIST테이블의 모든 요소 모두 불러오기
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,trip_list);    //ArrayAdapter : 배열에 담긴 데이터를 관리하는 클래스
         list.setAdapter(adapter);       //setAdapter로 액티비티에 보이게 한다
-        list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,trip_list));
 
         list.setOnItemClickListener(this);   //리스트뷰의 아이템을 클릭했을 때 처리할 리스너를 설정
         list.setOnItemLongClickListener(this);  //롱클릭헀을 때

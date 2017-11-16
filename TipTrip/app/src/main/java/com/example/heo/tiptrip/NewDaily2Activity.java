@@ -36,12 +36,16 @@ public class NewDaily2Activity extends AppCompatActivity {
     }
 
     public void onButtonClick_new_daily_checking(View v){
-        Intent intent = new Intent(getApplicationContext(), DailyActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("name", name);
+        intent.putExtra("country", country);
 
         EditText daily_text = (EditText) findViewById(R.id.daily_text);
-        String daily = daily_text.getText().toString();
+        String context = daily_text.getText().toString();
 
-        
+        DBHelper dbHelper = new DBHelper(getApplicationContext(), "db.db");     //db불러오기
+        dbHelper.Insert_daily(name,country,title,year,month,day,context);
+        dbHelper.close();
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
