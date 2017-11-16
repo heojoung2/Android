@@ -27,6 +27,7 @@
         <activity android:name=".HouseholdActivity"></activity>
         <activity android:name=".TouristsiteActivity"></activity>
         <activity android:name=".DailogActivity"></activity>
+        <activity android:name=".NewDailogActivity"></activity>
 
     </application>
 
