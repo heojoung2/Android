@@ -94,7 +94,7 @@ public class TriplistActivity extends AppCompatActivity implements AdapterView.O
 
                 dbHelper.Delete("TRIPLIST",name,country);   //선택한 제목 삭제
                 dbHelper.Delete("HOUSEHOLD",name,country);   //제목과 나라와 같은 가계부 삭제
-                dbHelper.Delete("DAILOG",name,country);   //제목과 나라와 같은 일정 삭제
+                dbHelper.Delete("DAILY",name,country);   //제목과 나라와 같은 일정 삭제
                 ListView();
             }
         });

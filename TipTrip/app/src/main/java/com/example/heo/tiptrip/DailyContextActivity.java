@@ -15,9 +15,6 @@ public class DailyContextActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setTitle("새 일지");
-
         Intent intent = getIntent();
         name = intent.getExtras().get("name").toString();
         country = intent.getExtras().get("country").toString();
@@ -25,6 +22,9 @@ public class DailyContextActivity extends AppCompatActivity {
         String year = intent.getExtras().get("year").toString();
         String month = intent.getExtras().get("month").toString();
         String day = intent.getExtras().get("day").toString();
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setTitle(title);
 
         setContentView(R.layout.activity_daily_context);
 
