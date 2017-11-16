@@ -27,7 +27,7 @@ public class NewDaily2Activity extends AppCompatActivity {
         title = intent.getExtras().get("title").toString();
         year = intent.getExtras().get("year").toString();
         month = intent.getExtras().get("month").toString();
-        day = intent.getExtras().get("month").toString();
+        day = intent.getExtras().get("day").toString();
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("새 일지");

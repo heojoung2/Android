@@ -59,6 +59,17 @@ public class DBHelper extends SQLiteOpenHelper {
         return cnt;
     }
 
+    public String Select_Daily(String name,String country,String title,String year,String month,String day){
+        SQLiteDatabase db = getReadableDatabase();
+        String result="";
+        Cursor cursor = db.rawQuery("SELECT context FROM DAILY WHERE name='"+name+"' AND country='"+country+"' AND title ='"+title+"' AND year ='"+year+"' AND month ='"+month+"' AND day ='"+day+"'", null);
+        while (cursor.moveToNext()){
+            result=cursor.getString(0);
+        }
+        db.close();
+        return result;
+    }
+
     public void Insert_triplist(String name, String country){
         SQLiteDatabase db = getWritableDatabase();
         String query = "INSERT INTO TRIPLIST VALUES(null, '" + name + "', '" + country + "');";
@@ -74,7 +85,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void Insert_daily(String name, String country,String title, String year,String month, String day, String context){
-        System.out.println("2222");
         SQLiteDatabase db = getWritableDatabase();
         String query = "INSERT INTO DAILY VALUES(null, '" + name + "', '" + country + "', '"+title+"', '"+year+"', '"+month+"', '"+day+"', '"+context+"');";
         db.execSQL(query);
@@ -83,7 +93,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void Delete(String table_name,String name, String country){
         SQLiteDatabase db = getWritableDatabase();
-        String query = "DELETE FROM "+table_name+" WHERE name='"+name+"'"+" AND country='"+country+"'";
+        String query = "DELETE FROM "+table_name+" WHERE name='"+name+"' AND country='"+country+"'";
+        db.execSQL(query);
+        db.close();
+    }
+
+    public void Delete_Daily(String name,String country,String title,String year,String month,String day){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "DELETE FROM DAILY"+" WHERE name='"+ name+"' AND country='"+country+"' AND title='"+title+"' AND year='"+year+"' AND month='"+month+"' AND day='"+day+"'";
         db.execSQL(query);
         db.close();
     }
@@ -104,9 +121,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         List<String> result = new ArrayList<String>();
 
-        Cursor cursor = db.rawQuery("SELECT title FROM DAILY WHERE name='"+name+"' AND country='"+country+"'", null);
+        Cursor cursor = db.rawQuery("SELECT year,month,day,title FROM DAILY WHERE name='"+name+"' AND country='"+country+"'", null);
         while (cursor.moveToNext()){
-            result.add(cursor.getString(0));
+            result.add(cursor.getString(0)+"/"+cursor.getString(1)+"/"+cursor.getString(2)+" "+cursor.getString(3));
         }
         db.close();
         return result;
