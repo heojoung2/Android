@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class NewDaily2Activity extends AppCompatActivity {
@@ -32,6 +33,18 @@ public class NewDaily2Activity extends AppCompatActivity {
         actionbar.setTitle("새 일지");
 
         setContentView(R.layout.activity_newdaily2);
+    }
+
+    public void onButtonClick_new_daily_checking(View v){
+        Intent intent = new Intent(getApplicationContext(), DailyActivity.class);
+
+        EditText daily_text = (EditText) findViewById(R.id.daily_text);
+        String daily = daily_text.getText().toString();
+
+        
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
     }
 
 }

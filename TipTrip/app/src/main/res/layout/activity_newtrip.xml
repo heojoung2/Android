@@ -7,15 +7,6 @@
     tools:context="com.example.heo.tiptrip.NewtripActivity">
 
     <TextView
-        android:id="@+id/country"
-        android:layout_width="99dp"
-        android:layout_height="46dp"
-        android:text="나라"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        tools:layout_editor_absoluteY="137dp"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
         android:id="@+id/country_text"
         android:layout_width="253dp"
         android:layout_height="49dp"
