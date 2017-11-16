@@ -10,18 +10,10 @@
         android:id="@+id/country"
         android:layout_width="99dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:text="나라"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.027"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286" />
+        tools:layout_editor_absoluteY="137dp"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/country_text"
