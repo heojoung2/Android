@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
-public class DailogActivity extends AppCompatActivity {
-    String name="";
-    String country="";
+public class NewDailyActivity extends AppCompatActivity {
+    String name = "";
+    String country = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +21,22 @@ public class DailogActivity extends AppCompatActivity {
         country = intent.getExtras().get("country").toString();
 
         ActionBar actionbar = getSupportActionBar();
-        actionbar.setTitle("일지");
+        actionbar.setTitle("새 일지");
 
-        setContentView(R.layout.activity_dailog);
+        setContentView(R.layout.activity_newdaily);
     }
-    public void onButtonClick_newdialog(View v){
-        Intent intent = new Intent(getApplicationContext(), NewDailogActivity.class);
+
+    public void onButtonClick_data_checking(View v) {
+        Intent intent = new Intent(getApplicationContext(), NewDaily2Activity.class);
+
+        DatePicker datepicker;
+        datepicker = (DatePicker)findViewById(R.id.datePicker);
 
         intent.putExtra("name", name);
         intent.putExtra("country", country);
+        intent.putExtra("year", datepicker.getYear());
+        intent.putExtra("month", datepicker.getMonth());
+        intent.putExtra("day", datepicker.getDayOfMonth());
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
