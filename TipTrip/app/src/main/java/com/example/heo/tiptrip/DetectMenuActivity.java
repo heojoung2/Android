@@ -56,9 +56,10 @@ public class DetectMenuActivity extends AppCompatActivity {
         // 이전 인텐트에서 이미지 URI를 받아오기
         Intent intent = getIntent();
         String getUri = intent.getStringExtra("imageUri");
-        Uri imageUri = Uri.parse(getUri);
+        Uri imageUri = Uri.parse(getUri);   // 스트링이였던 이미지 uri를 다시 Uri 형태로 바꾸기
 
         try {
+            // 이미지 uri를 bitmap 형태로 바꾸기
             // scale the image to save on bandwidth
             Bitmap bitmap = scaleBitmapDown(MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri), 1200);
 
@@ -72,7 +73,7 @@ public class DetectMenuActivity extends AppCompatActivity {
     }
 
 
-    // 크기 조절
+    // 이미지 크기 조절하는 함수
     public Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
 
         int originalWidth = bitmap.getWidth();
@@ -90,6 +91,7 @@ public class DetectMenuActivity extends AppCompatActivity {
             resizedHeight = maxDimension;
             resizedWidth = maxDimension;
         }
+
         return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
     }
 
@@ -147,7 +149,7 @@ public class DetectMenuActivity extends AppCompatActivity {
                         base64EncodedImage.encodeContent(imageBytes);
                         annotateImageRequest.setImage(base64EncodedImage);
 
-                        // add the features we want
+                        // TEXT_DETECTION (다른 기능을 사용할 때에는 여기 수정!!)
                         annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
                             Feature textDetection = new Feature();
                             textDetection.setType("TEXT_DETECTION");
@@ -170,8 +172,7 @@ public class DetectMenuActivity extends AppCompatActivity {
                 } catch (GoogleJsonResponseException e) {
                     Log.d(TAG, "failed to make API request because " + e.getContent());
                 } catch (IOException e) {
-                    Log.d(TAG, "failed to make API request because of other IOException " +
-                            e.getMessage());
+                    Log.d(TAG, "failed to make API request because of other IOException " + e.getMessage());
                 }
                 return "Cloud Vision API request failed. Check logs for details.";
             }
