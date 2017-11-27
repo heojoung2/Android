@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.heo.tiptrip">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,9 +25,11 @@
         <activity android:name=".NewtripActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".MenuActivity"></activity>
-        <activity android:name=".HouseholdActivity"></activity>
+        <activity android:name=".HouseholdActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".TouristsiteActivity"></activity>
         <activity android:name=".DailogActivity"></activity>
+
 
     </application>
 
