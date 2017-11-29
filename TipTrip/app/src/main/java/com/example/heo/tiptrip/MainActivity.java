@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void onButtonClick_touristsite(View v){
-        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), TouristsiteActivity.class);
         intent.putExtra("country", country);
         startActivity(intent);
     }
