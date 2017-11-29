@@ -1,44 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.heo.tiptrip">
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
 
     <application
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAp1MOTPBJ-Y0DzlpBnTOMih3pT8GjTKgU" />
 
         <!-- 로딩(스플래시) 액티비티 -->
-        <activity
-            android:name=".LoadingActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
+        <activity android:name=".LoadingActivity"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".TriplistActivity" />
-        <activity android:name=".NewtripActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".HouseholdActivity" />
-        <activity android:name=".TouristsiteActivity" />
-        <activity android:name=".DailyActivity" />
-        <activity android:name=".NewDailyActivity" />
-        <activity android:name=".NewDaily2Activity" />
-        <activity android:name=".DailyContextActivity" />
+        <activity android:name=".TriplistActivity"></activity>
+        <activity android:name=".NewtripActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".HouseholdActivity"></activity>
+        <activity android:name=".TouristsiteActivity"></activity>
+        <activity android:name=".DailyActivity"></activity>
+        <activity android:name=".NewDailyActivity"></activity>
+        <activity android:name=".NewDaily2Activity"></activity>
+        <activity android:name=".DailyContextActivity"></activity>
 
     </application>
 
