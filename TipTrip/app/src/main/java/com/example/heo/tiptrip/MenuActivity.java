@@ -86,7 +86,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public File createImageFile() throws IOException{
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Datone());
         String imageFileName = "JPEG_" + timeStamp + ".jpg";
 
         File imageFile = null;
