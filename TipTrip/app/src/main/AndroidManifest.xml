@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.heo.tiptrip">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -26,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".TriplistActivity" />
         <activity android:name=".NewtripActivity" />
         <activity android:name=".MainActivity" />
@@ -37,6 +39,22 @@
         <activity android:name=".NewDaily2Activity" />
         <activity android:name=".DailyContextActivity" />
         <activity android:name=".MapsActivity"></activity>
+=======
+
+        <activity android:name=".TriplistActivity"></activity>
+        <activity android:name=".NewtripActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".HouseholdActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".TouristsiteActivity"></activity>
+        <activity android:name=".DailyActivity"></activity>
+        <activity android:name=".NewDailyActivity"></activity>
+        <activity android:name=".NewDaily2Activity"></activity>
+        <activity android:name=".DailyContextActivity"></activity>
+
+
+>>>>>>> dbb6e4a82453c1e093b8d8b810948eb68d97c27b
     </application>
 
 </manifest>
